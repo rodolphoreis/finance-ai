@@ -1,0 +1,23 @@
+-- CreateEnum
+CREATE TYPE "TransactionType" AS ENUM ('DEPOSIT', 'EXPENSE', 'INVESTMENT', 'TRANSFER', 'LOAN', 'REFUND', 'WITHDRAWAL');
+
+-- CreateEnum
+CREATE TYPE "TransactionCategory" AS ENUM ('SALARY', 'BUSINESS_INCOME', 'GIFT', 'OTHER_INCOME', 'GROCERIES', 'RENT', 'UTILITIES', 'TRANSPORT', 'ENTERTAINMENT', 'HEALTH', 'EDUCATION', 'SHOPPING', 'DINING', 'TRAVEL', 'INSURANCE', 'STOCKS', 'REAL_ESTATE', 'CRYPTOCURRENCY', 'SAVINGS', 'PENSION', 'FAMILY_SUPPORT', 'LOAN_PAYMENT', 'TAXES', 'CHARITY', 'MISCELLANEOUS');
+
+-- CreateEnum
+CREATE TYPE "TransactionPaymentMethod" AS ENUM ('CREDIT_CARD', 'DEBIT_CARD', 'BANK_TRANSFER', 'CASH', 'DIGITAL_WALLET', 'CHECK', 'CRYPTOCURRENCY', 'OTHER', 'PAYPAL');
+
+-- CreateTable
+CREATE TABLE "Transaction" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "type" "TransactionType" NOT NULL,
+    "amount" DECIMAL(10,2) NOT NULL,
+    "category" "TransactionCategory" NOT NULL,
+    "paymentMethod" "TransactionPaymentMethod" NOT NULL,
+    "date" TIMESTAMP(3) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Transaction_pkey" PRIMARY KEY ("id")
+);
