@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Mulish } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { dark, neobrutalism, shadesOfPurple } from "@clerk/themes";
 
 const mulish = Mulish({
   subsets: ["latin-ext"],
@@ -22,7 +23,18 @@ export default function RootLayout({
   return (
     <html lang="pt-PT">
       <body className={`${mulish.className} dark antialiased`}>
-        <ClerkProvider>{children}</ClerkProvider>
+        <ClerkProvider
+          appearance={{
+            baseTheme: [dark, neobrutalism],
+            variables: { colorPrimary: "blue" },
+            signIn: {
+              baseTheme: [shadesOfPurple],
+              variables: { colorPrimary: "green" },
+            },
+          }}
+        >
+          {children}
+        </ClerkProvider>
       </body>
     </html>
   );

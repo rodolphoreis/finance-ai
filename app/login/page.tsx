@@ -16,7 +16,7 @@ export default async function LoginPage() {
       <div className="h-full max-w-[700px] content-center justify-center">
         <div className="flex w-full flex-col px-10 py-10">
           <div className="flex items-center gap-3">
-            <SiWebmoney size={40} className="text-green-400" />
+            <SiWebmoney size={40} className="text-primary" />
 
             <h1 className="text-4xl font-extrabold">finance.ai</h1>
           </div>

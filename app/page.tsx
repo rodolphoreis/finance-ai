@@ -1,20 +1,24 @@
-import Image from "next/image";
+import { SignedIn, UserButton } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
+import { dark } from "@clerk/themes";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+export default async function Home() {
+  const { userId } = await auth();
+  if (!userId) {
+    return redirect("/login");
+  }
   return (
-    <main className="grid h-screen w-full grid-cols-2">
-      <div className="h-full">
-        <Image
-          src="/img-bitcoin.jpeg"
-          alt="bitcoin"
-          width={500}
-          height={500}
-          className="h-screen w-full object-cover"
+    <main className="mx-auto flex max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
+      <SignedIn>
+        <UserButton
+          showName
+          appearance={{
+            baseTheme: dark,
+          }}
         />
-      </div>
-      <div className="h-full">
-        <h1>New</h1>
-      </div>
+      </SignedIn>
+      <h1>Home</h1>
     </main>
   );
 }
