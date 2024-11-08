@@ -7,6 +7,8 @@ import {
 } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 import TransactionTypeBadge from "../_components/type-badge";
+import { Button } from "@/app/_components/ui/button";
+import { Edit2Icon, TrashIcon } from "lucide-react";
 
 export const transctioncolumns: ColumnDef<Transaction>[] = [
   {
@@ -139,5 +141,17 @@ export const transctioncolumns: ColumnDef<Transaction>[] = [
   {
     accessorKey: "actios",
     header: "Ações",
+    cell: () => {
+      return (
+        <div className="flex gap-2">
+          <Button variant="ghost" className="text-muted-foreground">
+            <Edit2Icon />
+          </Button>
+          <Button variant="ghost" className="text-muted-foreground">
+            <TrashIcon />
+          </Button>
+        </div>
+      );
+    },
   },
 ];
