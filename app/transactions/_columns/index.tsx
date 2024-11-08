@@ -112,10 +112,29 @@ export const transctioncolumns: ColumnDef<Transaction>[] = [
   {
     accessorKey: "date",
     header: "Data",
+    cell: ({ row: { original: transaction } }) => {
+      const date = new Date(transaction.date);
+      return (
+        <p>
+          {date.toLocaleDateString("pt-PT", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+          })}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "amount",
     header: "Valor",
+    cell: ({ row: { original: transaction } }) => {
+      const amount = new Intl.NumberFormat("pt-PT", {
+        style: "currency",
+        currency: "EUR",
+      }).format(Number(transaction.amount));
+      return <p>{amount}</p>;
+    },
   },
   {
     accessorKey: "actios",
