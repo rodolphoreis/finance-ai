@@ -2,18 +2,22 @@ import { DataTable } from "../_components/ui/data-table";
 import { transctioncolumns } from "./_columns";
 import { db } from "../_lib/prisma";
 import AddTransactionButton from "../_components/add-transaction-button";
+import Navbar from "../_components/Navbar";
 
 const TransactionsPage = async () => {
   const transactions = await db.transaction.findMany({});
 
   return (
-    <div className="mt-5 space-y-6 px-6">
-      <div className="flex w-full items-center justify-between">
-        <h1 className="text-xl font-bold md:text-2xl">Transações</h1>
-        <AddTransactionButton />
+    <>
+      <Navbar />
+      <div className="mt-5 space-y-6 px-6">
+        <div className="flex w-full items-center justify-between">
+          <h1 className="text-xl font-bold md:text-2xl">Transações</h1>
+          <AddTransactionButton />
+        </div>
+        <DataTable columns={transctioncolumns} data={transactions} />
       </div>
-      <DataTable columns={transctioncolumns} data={transactions} />
-    </div>
+    </>
   );
 };
 
