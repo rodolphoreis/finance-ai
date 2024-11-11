@@ -6,7 +6,7 @@ import Navbar from "./_components/Navbar";
 export default async function Home() {
   const { userId } = await auth();
   if (!userId) {
-    return redirect("/login");
+    redirect("/login");
   }
   return (
     <>

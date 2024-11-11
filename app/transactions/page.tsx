@@ -3,8 +3,14 @@ import { transctioncolumns } from "./_columns";
 import { db } from "../_lib/prisma";
 import AddTransactionButton from "../_components/add-transaction-button";
 import Navbar from "../_components/Navbar";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 const TransactionsPage = async () => {
+  const { userId } = await auth();
+  if (!userId) {
+    redirect("/login");
+  }
   const transactions = await db.transaction.findMany({});
 
   return (
