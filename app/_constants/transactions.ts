@@ -10,28 +10,12 @@ export const TRANSACTION_TYPE_OPTIONS = [
     label: "Depósito",
   },
   {
-    value: TransactionType.WITHDRAWAL,
-    label: "Saque",
-  },
-  {
-    value: TransactionType.TRANSFER,
-    label: "Transferência",
-  },
-  {
     value: TransactionType.EXPENSE,
     label: "Despesa",
   },
   {
     value: TransactionType.INVESTMENT,
     label: "Investimento",
-  },
-  {
-    value: TransactionType.LOAN,
-    label: "Empréstimo",
-  },
-  {
-    value: TransactionType.REFUND,
-    label: "Reembolso",
   },
 ];
 
