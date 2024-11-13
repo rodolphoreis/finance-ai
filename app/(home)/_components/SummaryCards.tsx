@@ -9,13 +9,25 @@ import SummaryCard from "./SummaryCard";
 import AddTransactionButton from "@/app/_components/add-transaction-button";
 import { db } from "@/app/_lib/prisma";
 
-const SummaryCards = async () => {
+interface Summarycards {
+  month: string;
+}
+
+const SummaryCards = async ({ month }: Summarycards) => {
+  const year = new Date().getFullYear();
+
+  const formattedMonth = month.padStart(2, "0");
+
+  const where = {
+    date: {
+      gte: new Date(`${year}-${formattedMonth}-01`),
+      lte: new Date(`${year}-${formattedMonth}-31`),
+    },
+  };
   const depositsTotal = Number(
     (
       await db.transaction.aggregate({
-        where: {
-          type: "DEPOSIT",
-        },
+        where: { ...where, type: "DEPOSIT" },
         _sum: {
           amount: true,
         },
@@ -25,9 +37,7 @@ const SummaryCards = async () => {
   const investmentsTotal = Number(
     (
       await db.transaction.aggregate({
-        where: {
-          type: "INVESTMENT",
-        },
+        where: { ...where, type: "INVESTMENT" },
         _sum: {
           amount: true,
         },
@@ -37,9 +47,7 @@ const SummaryCards = async () => {
   const expensesTotal = Number(
     (
       await db.transaction.aggregate({
-        where: {
-          type: "EXPENSE",
-        },
+        where: { ...where, type: "EXPENSE" },
         _sum: {
           amount: true,
         },
@@ -49,7 +57,7 @@ const SummaryCards = async () => {
   const balance = depositsTotal - investmentsTotal - expensesTotal;
 
   return (
-    <div className="mx-4 mt-4 flex flex-col gap-4">
+    <div className="mx-4 flex flex-col gap-4">
       <Card className="flex items-center justify-between">
         <div>
           <CardHeader className="flex flex-row items-center gap-4">
