@@ -7,58 +7,24 @@ import {
 } from "lucide-react";
 import SummaryCard from "./SummaryCard";
 import AddTransactionButton from "@/app/_components/add-transaction-button";
-import { db } from "@/app/_lib/prisma";
 
 interface Summarycards {
   month: string;
+  balance: number;
+  investmentsTotal: number;
+  depositsTotal: number;
+  expensesTotal: number;
 }
 
-const SummaryCards = async ({ month }: Summarycards) => {
-  const year = new Date().getFullYear();
-
-  const formattedMonth = month.padStart(2, "0");
-
-  const where = {
-    date: {
-      gte: new Date(`${year}-${formattedMonth}-01`),
-      lte: new Date(`${year}-${formattedMonth}-31`),
-    },
-  };
-  const depositsTotal = Number(
-    (
-      await db.transaction.aggregate({
-        where: { ...where, type: "DEPOSIT" },
-        _sum: {
-          amount: true,
-        },
-      })
-    )?._sum?.amount,
-  );
-  const investmentsTotal = Number(
-    (
-      await db.transaction.aggregate({
-        where: { ...where, type: "INVESTMENT" },
-        _sum: {
-          amount: true,
-        },
-      })
-    )?._sum?.amount,
-  );
-  const expensesTotal = Number(
-    (
-      await db.transaction.aggregate({
-        where: { ...where, type: "EXPENSE" },
-        _sum: {
-          amount: true,
-        },
-      })
-    )?._sum?.amount,
-  );
-  const balance = depositsTotal - investmentsTotal - expensesTotal;
-
+const SummaryCards = async ({
+  balance,
+  investmentsTotal,
+  depositsTotal,
+  expensesTotal,
+}: Summarycards) => {
   return (
-    <div className="mx-4 flex flex-col gap-4">
-      <Card className="flex items-center justify-between">
+    <div className="flex flex-col gap-4">
+      <Card className="flex items-center justify-between bg-zinc-900">
         <div>
           <CardHeader className="flex flex-row items-center gap-4">
             <WalletIcon size={16} />
@@ -73,7 +39,7 @@ const SummaryCards = async ({ month }: Summarycards) => {
         </div>
       </Card>
 
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-3 gap-4">
         <SummaryCard
           icon={<PiggyBankIcon size={16} />}
           title="Investimento"
