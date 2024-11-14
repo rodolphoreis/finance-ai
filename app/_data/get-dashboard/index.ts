@@ -90,7 +90,7 @@ export const getdashboard = async (month: string) => {
   const lastTransaction = await db.transaction.findMany({
     where,
     orderBy: { date: "desc" },
-    take: 10,
+    take: 15,
   });
 
   return {
