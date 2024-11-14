@@ -36,7 +36,7 @@ export const TimeSelect = () => {
   };
   return (
     <div className="mx-6 flex justify-between py-6">
-      <h1>Dashboard</h1>
+      <h1 className="text-xl font-bold md:text-2xl">Dashboard</h1>
       <div>
         <Select
           onValueChange={(value) => handleMonthChange(value)}
