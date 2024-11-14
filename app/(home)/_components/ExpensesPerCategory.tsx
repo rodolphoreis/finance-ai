@@ -1,4 +1,9 @@
-import { CardContent, CardHeader, CardTitle } from "@/app/_components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/app/_components/ui/card";
 import { Progress } from "@/app/_components/ui/progress";
 import { ScrollArea } from "@/app/_components/ui/scroll-area";
 import { TRANSACTION_CATEGORY_OPTIONS } from "@/app/_constants/transactions";
@@ -19,11 +24,11 @@ const ExpensesPerCategory = ({
   expensesPerCategory,
 }: ExpensesPerCategoryProps) => {
   return (
-    <div>
-      <ScrollArea className="col-span-2 h-full rounded-md border pb-6">
-        <CardHeader>
-          <CardTitle className="folt-bold"> Gastos por Categoria</CardTitle>
-        </CardHeader>
+    <Card className="h-[480px]">
+      <CardHeader>
+        <CardTitle className="folt-bold"> Gastos por Categoria</CardTitle>
+      </CardHeader>
+      <ScrollArea className="col-span-2 h-[420px] rounded-md border border-none pb-6">
         <CardContent className="space-y-6">
           {expensesPerCategory.map((category) => (
             <div key={category.category} className="flex flex-col gap-2">
@@ -40,7 +45,7 @@ const ExpensesPerCategory = ({
           ))}
         </CardContent>
       </ScrollArea>
-    </div>
+    </Card>
   );
 };
 
