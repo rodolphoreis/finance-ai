@@ -2,13 +2,10 @@
   "builds": [
     {
       "src": "package.json",
-      "use": "@vercel/node",
-      "config": {
-        "maxLambdaSize": "50mb"
-      }
+      "use": "@vercel/node"
     }
   ],
   "hooks": {
-    "build": "prisma generate"
+    "build": "npm run prisma-generate && npm run build"
   }
 }
