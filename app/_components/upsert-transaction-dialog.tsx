@@ -193,7 +193,7 @@ const UpsertTransactionDialog = ({
               name="category"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Categori</FormLabel>
+                  <FormLabel>Categoria</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
