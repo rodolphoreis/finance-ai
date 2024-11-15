@@ -8,6 +8,11 @@ export const createStripeCheckout = async () => {
   if (!userId) {
     throw new Error("User not found");
   }
+
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("Stripe integration is not active yet.");
+  }
+
   if (!process.env.STRIPE_SECRET_KEY) {
     throw new Error("Missing Stripe secret key");
   }
